@@ -127,18 +127,33 @@ define teamcity::agent (
   $kill_command         = "${use_agent_path}/bin/agent.sh stop force"
   $service_description  = "Teamcity build agent '${agent_name}'"
 
-  file { "/etc/systemd/system/teamcity-agent-${agent_name}.service":
-    ensure  => 'present',
-    content => template('teamcity/systemd_teamcity.service.erb'),
-    mode    => '0755',
-  } ~>
+  if $::operatingsystem == "Ubuntu" && $::operatingsystemrelease == "14.04" {
+    file { "/etc/init.d/teamcity-agent-${agent_name}":
+      ensure  => 'file',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      content => template("teamcity/teamcity-agent.erb"),
+      notify  => Service["teamcity-agent-${agent_name}"],
+    } ->
+    service { "teamcity-agent-${agent_name}":
+      ensure => 'running',
+      enable => true,
+    }
+  } else {
+    file { "/etc/systemd/system/teamcity-agent-${agent_name}.service":
+      ensure  => 'present',
+      content => template('teamcity/systemd_teamcity.service.erb'),
+      mode    => '0755',
+    } ~>
 
-  Exec['systemctl-daemon-reload'] ->
+    Exec['systemctl-daemon-reload'] ->
 
-  service { "teamcity-agent-${agent_name}":
-    ensure  => 'running',
-    enable  => true,
-    require => File["${use_agent_path}/bin/agent.sh"]
+    service { "teamcity-agent-${agent_name}":
+      ensure  => 'running',
+      enable  => true,
+      require => File["${use_agent_path}/bin/agent.sh"]
+    }
   }
 
 }
