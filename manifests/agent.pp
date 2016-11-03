@@ -127,7 +127,7 @@ define teamcity::agent (
   $kill_command         = "${use_agent_path}/bin/agent.sh stop force"
   $service_description  = "Teamcity build agent '${agent_name}'"
 
-  if $::operatingsystem == "Ubuntu" && $::operatingsystemrelease == "14.04" {
+  if $::operatingsystem == "Ubuntu" and $::operatingsystemrelease == "14.04" {
     file { "/etc/init.d/teamcity-agent-${agent_name}":
       ensure  => 'file',
       owner   => 'root',
