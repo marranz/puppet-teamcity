@@ -58,7 +58,7 @@ class teamcity::install inherits teamcity::params  {
       extract         => true,
       source          => $use_download_url,
       extract_path    => $use_target_dir,
-      creates         => $use_target_dir,
+      creates         => "${use_target_dir}/bin",
       checksum_verify => false,
       cleanup         => true,
       before            => File[$teamcity_data_path],
