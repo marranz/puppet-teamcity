@@ -61,7 +61,9 @@ class teamcity::install inherits teamcity::params  {
       creates         => "${use_target_dir}/TeamCity/bin",
       checksum_verify => false,
       cleanup         => true,
-      before            => File[$teamcity_data_path],
+      before          => File[$teamcity_data_path],
+      user            => 'teamcity',
+      group           => 'teamcity',
     }
   }
 
