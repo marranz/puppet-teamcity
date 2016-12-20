@@ -18,6 +18,8 @@ class teamcity::params (
   $teamcity_base_url              = 'http://download.jetbrains.com/teamcity/TeamCity-%%%VERSION%%%.tar.gz',
   $teamcity_download_timeout      = 180,
 
+  $teamcity_server_mem_opts       = undef,
+
   $authentication                 = 'local',
   $ldap_configuration             = undef,
 
