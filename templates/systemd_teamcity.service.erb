@@ -11,8 +11,8 @@ Environment="HOME=/var/lib/teamcity"
 Environment="TEAMCITY_HOME=/var/lib/teamcity"
 Environment="TEAMCITY_LOGS=/opt/teamcity/logs"
 Environment="TEAMCITY_DATA_PATH=/var/lib/teamcity"
-<% unless scope.lookupvar('::teamcity::params::teamcity_server_mem_tops').nil? -%>
-Environment="TEAMCITY_SERVER_MEM_OPTS="<%= scope['::teamcity::params::teamcity_server_mem_tops'] %>"
+<% unless scope.lookupvar('::teamcity::params::teamcity_server_mem_opts').nil? -%>
+Environment="TEAMCITY_SERVER_MEM_OPTS="<%= scope['::teamcity::params::teamcity_server_mem_opts'] %>"
 <% end -%>
 
 ExecStartPre=-<%= @kill_command %>
