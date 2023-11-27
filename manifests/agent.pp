@@ -31,4 +31,9 @@ class teamcity::agent(
     cleanup         => true,
   }
 
+
+# to do: create config file /opt/teamcity-agent/conf/buildAgent.properties
+# to do: create systemd config
+# to do: create user teamcity to own /opt/teamcity-agent?
+
 }
