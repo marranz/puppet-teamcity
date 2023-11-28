@@ -40,7 +40,8 @@ class teamcity::agent (
   $use_download_url = regsubst($download_url, '%%%TC_MASTER%%%', $use_master_url)
   $use_agent_path   = "${tc_agent_path}_${agent_name}"
 
-  mkdir::p { $use_agent_path :
+  file { $use_agent_path:
+    ensure => directory,
     owner   => 'teamcity',
     group   => 'teamcity',
     before  => Archive["teamcity-agent-${agent_name}"],
