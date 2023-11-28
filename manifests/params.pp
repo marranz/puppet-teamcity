@@ -48,16 +48,16 @@ class teamcity::params (
 
 ) {
 
-  validate_re($authentication, '^(local|ldap)$',
-    "profiles::teamcity_master::authentication must be one of 'local' or 'ldap'"
-  )
+  #validate_re($authentication, '^(local|ldap)$',
+  #  "profiles::teamcity_master::authentication must be one of 'local' or 'ldap'"
+  #)
 
   if $authentication == 'ldap' and $ldap_configuration == undef {
     fail('profiles::teamcity_master: if authentication is LDAP you have to provide $ldap_configuration')
   }
 
-  validate_re($archive_provider, '^(camptocamp|puppet)$',
-    "teamcity::params::archive_provider must be one of 'camptocamp'/'puppet'"
-  )
+  #validate_re($archive_provider, '^(camptocamp|puppet)$',
+  #  "teamcity::params::archive_provider must be one of 'camptocamp'/'puppet'"
+  #)
 
 }
