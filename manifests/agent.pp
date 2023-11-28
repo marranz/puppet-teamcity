@@ -1,11 +1,11 @@
-define teamcity::agent (
+class teamcity::agent (
   $agent_name = $title,
   $master_url = undef,
   $port       = '9090',
 ) {
 
   include teamcity::params
-  Class['teamcity::params'] -> Teamcity::Agent<||>
+  #Class['teamcity::params'] -> Teamcity::Agent<||>
 
   include teamcity::agent::sudo
 
