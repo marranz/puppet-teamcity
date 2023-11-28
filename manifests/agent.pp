@@ -4,6 +4,12 @@ class teamcity::agent (
   $port       = '9090',
 ) {
 
+
+  $packages = [ "unzip"]
+  package {$packages:
+    ensure => present,
+  }
+
   include teamcity::params
   #Class['teamcity::params'] -> Teamcity::Agent<||>
 
